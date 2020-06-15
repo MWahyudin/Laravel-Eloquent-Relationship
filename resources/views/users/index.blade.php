@@ -13,15 +13,19 @@
         </tr>
     @endforeach  --}} 
     <tr>
-        <th>Country</th>
         <th>Name</th>
+        <th>Post</th>
     </tr>
-    @foreach($addresses as $address)
+    @foreach($users as $user)
+    <p>{{ $user->name }}</p>
+    @foreach ($user->posts as $post)
+        
+   
     {{--  {{  dd($user->address->country) }}  --}}
         <tr>
-            <td>{{ $address->country }}</td>
-            <td>{{ $address->user->name }}</td>
-        
+            <td>{{ $user->name }}</td>
+            <td>{{ $post->title }}</td>
         </tr>
+    @endforeach
     @endforeach
 </table>

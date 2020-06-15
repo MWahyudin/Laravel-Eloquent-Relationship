@@ -1,6 +1,7 @@
 <?php
 
 use App\Address;
+use App\Post;
 use App\User;
 use Carbon\Factory;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,45 @@ Route::get('/user', function () {
     // ]);
     // $users = User::all();
 
-    $addresses = Address::with('user')->get();
-    return view('user', compact('addresses'));
+    // $users = User::with('addresses')->get();
+    // $users[2]->addresses()->create([
+    //    'country' => 'Portugal' 
+    // ]);
+
+    // $addresses = Address::with('user')->get();
+    // $users = User::get(); // too much queries
+    $users = User::with('posts')->get();
+    // $users = User::has('posts', '>=', 2)->with('posts')->get(); // hhave a post
+    // $users = User::doesntHave('posts')->with('posts')->get(); // doesnt have a post
+    // $users[0]->posts()->create([
+    //     'title' => 'hasmnypost one'
+    // ]);
+    return view('users.index', compact('users'));
+});
+
+Route::get('/posts', function () {
+    // Post::create([
+    //     'user_id' => 1,
+    //     'title' => 'title one'
+    // ]);
+    // Post::create([
+    //     'user_id' => 2,
+    //     'title' => 'title twop'
+    // ]);
+    // Post::create([
+    //     'user_id' => 3,
+    //     'title' => 'title tree'
+    // ]);
+    // Post::create([
+    //     'user_id' => 4,
+    //     'title' => 'title four'
+    // ]);
+
+    $posts = Post::get();
+    // Post::create([
+    //     'title' => 'hasMany relationship'
+    // ]);
+    // dd($posts[4]->user);
+    // $users = User::with('posts')->get();
+    return view('posts.index', compact('posts'));
 });

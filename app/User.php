@@ -44,4 +44,12 @@ class User extends Authenticatable
 
         // uid = foreignkey in address table
     }
+
+    public function addresses(){
+        return $this->hasMany(Address::class);
+    }
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }
