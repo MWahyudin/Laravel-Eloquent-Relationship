@@ -14,15 +14,12 @@
     @endforeach
     --}} 
 
-    @foreach ($posts as $post)
-    <h1>{{ $post->title }}</h1>
-    <p>{{ $post->user->name }}</p>
-    <ul>
-        <h1>Tag Post</h1>
-    @foreach ($post->tags as $tag)
-       
-    <h3>{{ $tag->name }}</h3>
+    @foreach($tags as $tag)
+    <h1>{{ $tag->name }}</h1>
+    @foreach ($tag->posts as $post)
+        <ul>
+<li>{{ $post->title }}</li>
+        </ul>
     @endforeach
-    </ul>
-    @endforeach  
-
+        
+    @endforeach

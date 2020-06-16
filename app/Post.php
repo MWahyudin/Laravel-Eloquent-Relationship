@@ -16,4 +16,9 @@ class Post extends Model
             'name' => 'Guest User'
         ]);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

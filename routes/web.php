@@ -2,6 +2,7 @@
 
 use App\Address;
 use App\Post;
+use App\Tag;
 use App\User;
 use Carbon\Factory;
 use Illuminate\Support\Facades\Route;
@@ -88,11 +89,25 @@ Route::get('/posts', function () {
     //     'title' => 'title four'
     // ]);
 
-    $posts = Post::get();
+    // $posts = Post::get();
     // Post::create([
     //     'title' => 'hasMany relationship'
     // ]);
     // dd($posts[4]->user);
     // $users = User::with('posts')->get();
+//    $tag = Tag::first();
+   $post = Post::with('tags')->first();
+//    dd($post);
+//    $post->tags()->detach();
+//    $post->tags()->attach([9,6]);
+   $post->tags()->sync([9,8]);
+$posts = \App\Post::with(['tags','user'])->get();
+// dd($posts);
     return view('posts.index', compact('posts'));
+});
+Route::get('/tags', function(){
+    $tags = Tag::with('posts')->get();
+   
+
+    return view('tags.index', compact('tags'));
 });
